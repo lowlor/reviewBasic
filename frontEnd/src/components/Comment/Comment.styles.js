@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapperr = styled.div`
+export const Wrapper = styled.div`
 
 `;
 

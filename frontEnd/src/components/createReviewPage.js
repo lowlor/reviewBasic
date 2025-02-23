@@ -5,7 +5,10 @@ const NewReview = () =>{
     console.log('go to createReview');
     
     return(
-        <CreateReview/>
+        <>
+            <CreateReview/>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        </>
     )
 }
 

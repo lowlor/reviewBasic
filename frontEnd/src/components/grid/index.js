@@ -11,7 +11,7 @@ const Grid = ({data}) =>{
                {data.status ? (data.info.map(curr=>{
                        return(
                            <>
-                               <Link to={curr.name === 'Add more' ? `/CreateReview`:`/${curr.name}`}>
+                               <Link to={curr.name === 'Add more' ? `/CreateReview`:`/${curr.id}`}>
                                    <div class="box">
                                        <div>
                                            <h2>{curr.name}</h2>

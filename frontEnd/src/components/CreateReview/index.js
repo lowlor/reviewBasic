@@ -18,6 +18,7 @@ const CreateReview = () =>{
         console.log(infoInput);
         console.log(numberInput);
         
+        //prepare img
 
         const sendFile = async () =>{
             try {
@@ -30,16 +31,41 @@ const CreateReview = () =>{
                 )
 
                 console.log(data);
+
+
                 
                 if(data.status){
-                    const {dataImg} = await axios.post(`http://localhost:5000/api/review/img/${data.info}`,{
+                    //prepare img
+                    const newFileName = `${data.info}.png`;
+                    const img = new File([imgInput], newFileName,{type: imgInput.type})
+                    
+                    const formData = new FormData();
+                    formData.append('file', img)
+
+                    const dataImg = await axios.post(`http://localhost:5000/api/review/img/${data.info}`,
+                                                        formData,{
+                                                            headers: {
+                                                                "Content-Type" : "multipart/form-data"
+                                                            }
+                                                        }
+                                                    ) 
+                    console.log(dataImg);
+
+                    if(dataImg.data.status){
+                        console.log('upload img ok');
+                    }else{
+                        console.error('have ploblem in upload img');
                         
-                    }) 
+                    }
                 }
             } catch (error) {
                 console.error(error);
             }
         }
+
+        sendFile();
+
+        
     }
 
     return(
