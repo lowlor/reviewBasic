@@ -6,7 +6,10 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const cors = require('cors');
-
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+const { error } = require('console');
+const MySQLStore = require('express-mysql-session')(session);
 const connection = mySql.createConnection({
     host: '127.0.0.1',
     user: 'root',
@@ -14,7 +17,35 @@ const connection = mySql.createConnection({
     database: 'reviewData'
 })
 
-app.use(cors());
+
+//session
+const sessionStore = new MySQLStore({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'sessionView'
+});
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials : true,
+}));
+
+
+app.use(session({
+    secret : 'something',
+    resave: false,
+    saveUninitialized: true,
+    store: sessionStore,
+    cookie: {
+        secure: false,
+        httpOnly: true,
+        maxAge: 1000*60*60*24,
+        sameSite: 'lax'
+    }
+}))
+
 
 const storage = multer.diskStorage({
     destination: (req, file, cb)=>{
@@ -191,6 +222,147 @@ app.get('/api/review/:id',(req,res)=>{
         }
     })
 })
+
+
+app.post('/api/login',(req,res)=>{
+    const data =req.body;
+    console.log(data);
+    
+    const textToInsert = 'SELECT * FROM user WHERE username= ?';
+    connection.query(textToInsert,[data.username],(err,result,field)=>{
+        if(err){
+            return res.status(201).send(
+                {
+                    status:2,
+                    info:"error"
+                }
+            )
+        }
+        if(result.length > 0){
+            bcrypt.compare(data.password, result[0].password,(err,match)=>{
+                if(err){
+                    console.log(err);
+                    return res.status(201).send({
+                        status:0,
+                        info:'incorrect password'
+                    })
+                }
+                if(match){
+                    console.log('login now regis session');
+                    
+                    req.session.user = {
+                        id : result[0].id,
+                        username: data.username
+                    };
+
+                    console.log(req.session);
+                    
+                    return res.status(200).send({
+                        status: 1,
+                        info: 'valid'
+                    })
+                }else{
+                    return res.status(201).send(
+                        {
+                            status:0,
+                            info:'incrrorect password'
+                        }
+                    )
+                }
+            })
+        }
+    })
+})
+
+app.post('/api/register',(req,res)=>{
+    const data = req.body;
+    console.log(data);
+    
+    connection.query('SELECT * FROM user WHERE username = ?',[data.username],(err,result,fields)=>{
+        if(err) {
+            return res.status(201).send({status:0,info:'error'})
+        }
+        
+        if(result.length > 0){
+            return res.status(201).send({
+                status:0,
+                info:'already have username'
+            })
+        }else{
+            bcrypt.hash(data.password, 10, (err,hash)=>{
+                if(err){
+                    console.error('error in hashing');
+                    return res.status(201).send({
+                        status:0,
+                        info:'error creating passowrd'
+                    })
+                }
+                const idToinsert = crypto.randomUUID();
+
+                console.log(idToinsert, data.username, data.password);
+                
+                connection.query('INSERT INTO `user`(`id`,`username`,`password`) VALUES (?,?,?)',
+                    [idToinsert,data.username,hash] , (err,result, fields)=>{
+                        if(err){
+                            console.log(err);
+                            console.error('err in create user');
+                            return res.status(201).send({status:0,info:'error'})
+                        }
+                        return res.status(200).send({status:1,info:"complete create account"})
+                    }
+                )    
+
+                
+            })   
+        }
+    })
+})
+
+app.post('/api/auth', (req,res)=>{
+    console.log('user auth');
+    console.log(req.session);
+    console.log(req.session.user);
+    
+    if(req.session.user){
+        console.log('have user');
+        
+        res.status(200).send({
+            status:1,
+            info: req.session.user
+        })
+    }else{
+        console.log(' no user session');
+        
+        res.status(201).send({
+            status:0,
+            info: 'unauthorize access'
+        })
+    }
+})
+
+app.post('/api/logout',(req,res)=>{
+    console.log('user want to logout');
+    
+    req.session.destroy(err=>{
+        if(err){
+            console.log(err);
+            
+            return res.status(201).send({
+                status:0,
+                info: 'not success'
+            });
+        } else{
+            console.log('complete');
+            
+            res.clearCookie('connect.sid');
+            return res.status(200).send({
+                status:1,
+                info: 'log out ok'
+            });
+        }
+    })
+})
+
 app.listen(5000, ()=>{
     console.log('listening on port 5000...');
     
