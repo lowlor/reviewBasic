@@ -13,9 +13,15 @@ const Grid = ({data}) =>{
                            <>
                                <Link to={curr.name === 'Add more' ? `/CreateReview`:`/${curr.id}`}>
                                    <div class="box">
-                                       <div>
-                                           <h2>{curr.name}</h2>
-                                       </div>
+                                        <div>
+                                            {curr.img ? (
+                                                <img src={curr.img} alt='review-img'/>
+                                            ) : <></>}
+                                        </div>
+                                        <div>
+                                            <h2>{curr.name}</h2>
+                                            <p>{curr.rating}</p>
+                                        </div>
                                    </div>  
                                </Link>
                            </>)

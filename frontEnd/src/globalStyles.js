@@ -1,6 +1,5 @@
-import styled from "styled-components";
-
-export const GlobalStyles = styled.div`
+import { createGlobalStyle} from "styled-components";
+export const GlobalStyles = createGlobalStyle`
     :root{
         --maxWidth: 1280px;
     }
