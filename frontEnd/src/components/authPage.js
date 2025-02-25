@@ -2,11 +2,11 @@ import React from "react";
 import Register from "./register";
 import Login from "./login";
 
-const AuthPage = () =>{
+const AuthPage = ({setUpdate}) =>{
     
     return (
         <>
-            <Login/>
+            <Login setUpdate = {setUpdate}/>
             <Register/>
         </>
     )

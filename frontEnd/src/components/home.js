@@ -13,27 +13,19 @@ const initial = {
         info:'not great bro. Dont buy it'
     }]
 }
-const Home = () =>{
+const Home = ({setIsLogin, isLogin}) =>{
     const [dataState, setDataState] = useState(initial)
-    const [isLogin, setIsLogin] = useState(false);
     useEffect(()=>{
+        console.log('useEffect home');
         
         //const controller = new AbortController();
         //const signal = controller.signal;
-    
-
-        const auth = async()=>{
-            return await reAuth();
-        }
         const fetch = async() =>{
             try {
                 const {data} = await axios.get('http://localhost:5000/api/review');        
                 console.log(data);
 
-                const checkAuth = await auth();
-                console.log(checkAuth);
-                if(checkAuth.status){
-                    setIsLogin(true)
+                if(isLogin){
                     const dataToPut = {
                         status:1,
                         info:[...data.info, {name:'Add more'}]

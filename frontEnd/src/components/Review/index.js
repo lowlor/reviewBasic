@@ -9,6 +9,7 @@ const Review = ({data}) =>{
         <Wrapper>
             <Content>
                 <h1>{data.name}</h1>
+                <img src={data.img} alt="review-img"/>
                 <p>{data.rating}</p>
                 <p>{data.info}</p>
             </Content>

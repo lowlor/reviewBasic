@@ -3,7 +3,7 @@ import { Wrapper,Content } from "./login.styles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Login = () =>{
+const Login = ({setUpdate}) =>{
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ const Login = () =>{
 
             if(data.status){
                 alert('complte login account')
+                setUpdate(true);
                 navigate('/');
             }else{
                 return alert('erorr in login account')

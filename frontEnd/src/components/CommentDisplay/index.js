@@ -10,8 +10,10 @@ const CommentDisplay = ({commentData}) => {
             <Content>
                 {commentData ? commentData.map(curr=>(
                     <React.Fragment key={curr.id} >
-                        <h2>{curr.username}</h2>
-                        <p>{curr.info}</p> 
+                        <div class='comment'>
+                            <h2>{curr.username}</h2>
+                            <p>{curr.info}</p> 
+                        </div>
                     </React.Fragment>
                 )): <></>}
             </Content>

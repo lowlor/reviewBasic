@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReviewHeader from "./ReviewHeader";
 import Review from "./Review";
+import Header from "./header";
+import UpBar from "./upBar";
 import Comment from "./Comment";
 import CommentDisplay from "./CommentDisplay";
 import { data, useParams } from "react-router-dom";
@@ -12,7 +14,7 @@ const initial = {
     info: 'not found'
 }
 
-const ReviewPage = () =>{
+const ReviewPage = ({setIsLogin, isLogin}) =>{
     const [dataToPut,setData] = useState(initial);
     const [update,setUpdate] = useState(false);  
 
@@ -44,7 +46,8 @@ const ReviewPage = () =>{
 
     return(
     <>
-        <ReviewHeader/>
+        <UpBar setIsLogin={setIsLogin} isLogin={isLogin}/>
+        <Header text={'Review'}/>
         <Review data={dataToPut}/>
         <Comment reviewId={dataToPut.id} setUpdate={setUpdate}/>
         <CommentDisplay commentData={dataToPut.comment}/>

@@ -8,7 +8,7 @@ const buttonPush = () =>{
 }
 
 const CreateReview = () =>{
-    const [imgInput,setImgTnput] = useState(null);
+    const [imgInput,setImgTnput] = useState();
     const [nameText,setNameText] = useState('');
     const [infoInput,setInfoInput] = useState('Enter here');
     const [numberInput, setNumberInput] = useState(0);

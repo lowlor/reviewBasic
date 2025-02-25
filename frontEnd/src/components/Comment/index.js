@@ -33,10 +33,14 @@ const Comment = ({reviewId,setUpdate}) =>{
     return(
         <Wrapper>
             <Content>
-                <input value={username} onChange={(e)=>setUsername(e.target.value)} type="text"/>
-                <textarea value={commentText} onChange={(e)=>SetCommentText(e.target.value)} cols={40} rows={4}>
-                </textarea>
-                <button onClick={()=>sendCommentBtn()}>Send</button>
+                <div class='upper'>
+                    <input value={username} onChange={(e)=>setUsername(e.target.value)} type="text"/>
+                </div>
+                <div class="bottom">
+                    <textarea value={commentText} onChange={(e)=>SetCommentText(e.target.value)} cols={40} rows={4}>
+                    </textarea>
+                    <button onClick={()=>sendCommentBtn()}>Send</button>
+                </div>
             </Content>
         </Wrapper>        
     )

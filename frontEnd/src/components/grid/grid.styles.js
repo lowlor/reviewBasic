@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
     background-color: azure;
     width: 100%;
-    padding: 100px 10px;
+    padding: 10px 10px;
 `;
 
 export const Content = styled.div`
@@ -22,7 +22,25 @@ export const Content = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        text-align: center;
         flex-direction: column;
         background-color: aqua;
+        border-radius: 15px;
+        padding: 10px 0;
+        text-decoration: none;
+    }
+
+    .star-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .checked{
+        color: yellow;
+    }
+
+    .reviewImg{
+        width: 100px;
     }
 `;
