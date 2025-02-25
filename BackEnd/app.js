@@ -233,9 +233,10 @@ app.post('/api/login',(req,res)=>{
     const textToInsert = 'SELECT * FROM user WHERE username= ?';
     connection.query(textToInsert,[data.username],(err,result,field)=>{
         if(err){
+            
             return res.status(201).send(
                 {
-                    status:2,
+                    status:0,
                     info:"error"
                 }
             )
@@ -272,6 +273,13 @@ app.post('/api/login',(req,res)=>{
                     )
                 }
             })
+        }else{
+            return res.status(201).send(
+                {
+                    status:0,
+                    info:'incrrorect password'
+                }
+            )
         }
     })
 })

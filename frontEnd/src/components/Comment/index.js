@@ -4,11 +4,14 @@ import axios from "axios";
 
 const Comment = ({reviewId,setUpdate}) =>{
     const [username,setUsername] = useState('');
-    const [commentText,SetCommentText] = useState('');
+    const [commentText,setCommentText] = useState('');
 
     const sendCommentBtn = async() =>{
         console.log(reviewId, username, commentText);
         
+        if(username === '' || commentText === ''){
+            return alert('Fill all Text');
+        }
         try {
             const {data} = await axios.post(`http://localhost:5000/api/comment`,
                 {
@@ -21,6 +24,8 @@ const Comment = ({reviewId,setUpdate}) =>{
             if(data.status){
                 console.log('upload comment ok');
                 setUpdate(true)
+                setUsername('');
+                setCommentText('')
                 //update review page
             }else{
                 console.log('error upload');
@@ -34,10 +39,10 @@ const Comment = ({reviewId,setUpdate}) =>{
         <Wrapper>
             <Content>
                 <div class='upper'>
-                    <input value={username} onChange={(e)=>setUsername(e.target.value)} type="text"/>
+                    <input class="nameInput" placeholder="Enter your name" value={username} onChange={(e)=>setUsername(e.target.value)} type="text"/>
                 </div>
                 <div class="bottom">
-                    <textarea value={commentText} onChange={(e)=>SetCommentText(e.target.value)} cols={40} rows={4}>
+                    <textarea placeholder="Enter your opinion" value={commentText} onChange={(e)=>setCommentText(e.target.value)} cols={70} rows={4}>
                     </textarea>
                     <button onClick={()=>sendCommentBtn()}>Send</button>
                 </div>

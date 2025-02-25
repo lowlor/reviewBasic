@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ReviewHeader from "./ReviewHeader";
 import Review from "./Review";
 import Header from "./header";
 import UpBar from "./upBar";
@@ -47,7 +46,7 @@ const ReviewPage = ({setIsLogin, isLogin}) =>{
     return(
     <>
         <UpBar setIsLogin={setIsLogin} isLogin={isLogin}/>
-        <Header text={'Review'}/>
+        <Header text={dataToPut.name} image={dataToPut.img}/>
         <Review data={dataToPut}/>
         <Comment reviewId={dataToPut.id} setUpdate={setUpdate}/>
         <CommentDisplay commentData={dataToPut.comment}/>

@@ -9,13 +9,17 @@ export const Content = styled.div`
     max-width: var(--maxWidth);
     padding: 10px 200px;
 
+    
     display: flex;
     align-items: start;
     justify-content: center;
     flex-direction: column;
     
+    gap: 10px;
     .comment{
-        padding: 10px;
+        border-radius: 20px 20px 20px 0;
+        background-color: darkseagreen;
+        padding: 10px 60px 10px 10px;
         border-bottom : 1px solid black;
     }
 `;

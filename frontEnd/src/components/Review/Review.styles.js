@@ -15,4 +15,6 @@ export const Content = styled.div`
     img{
         width: 500px;
     }
+
+    
 `;

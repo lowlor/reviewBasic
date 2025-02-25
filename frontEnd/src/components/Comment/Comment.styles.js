@@ -16,6 +16,26 @@ export const Content = styled.div`
     gap   : 20px ;
     flex-direction: column;
     
+    .nameInput{
+        border-radius: 10px;
+        border: 0;
+        padding: 6px 10px;
+    }
+
+    .nameInput:focus{
+        outline: none;
+    }
+
+    textarea{
+        border: 0;
+        border-radius: 20px;
+        padding: 10px;
+
+        &:focus{
+            outline: none;
+        }
+    }
+
     .upper{
         width: 100%;
         display: flex;
@@ -26,10 +46,25 @@ export const Content = styled.div`
     .bottom{
         width: 100%;
         display: flex;
-        align-items: center;
+        align-items: end;
         justify-content: space-between;
         flex-direction: row;
-        gap: 30px;
+
+        button{
+            padding: 7px 30px;
+            border: 0;
+            border-radius: 10px;
+            background-color: beige;
+
+        
+            transition: .5s;
+
+            &:hover{
+                background-color: #000;
+                color: #fff;
+            }
+        
+        }
     }
 
 `;

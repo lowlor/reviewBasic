@@ -30,9 +30,13 @@ export const GlobalStyles = createGlobalStyle`
         }
 
         p{
-            font-size: 2rem;
+            font-size: 1rem;
         }
+
+        
     }
+
+    
 
     h1,h2,h3,h4,p{
         margin: 0;

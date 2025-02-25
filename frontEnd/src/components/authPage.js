@@ -1,5 +1,4 @@
 import React from "react";
-import Register from "./register";
 import Login from "./login";
 
 const AuthPage = ({setUpdate}) =>{
@@ -7,7 +6,6 @@ const AuthPage = ({setUpdate}) =>{
     return (
         <>
             <Login setUpdate = {setUpdate}/>
-            <Register/>
         </>
     )
 }
