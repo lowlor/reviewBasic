@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+    z-index: 2;
     width: 100%;
     background-color: darkgreen;
 `;
 
 export const Content = styled.div`
+    z-index: 2;
     height: 40px;    
     display: flex;
     justify-content: end;

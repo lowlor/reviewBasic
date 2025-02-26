@@ -30,15 +30,7 @@ export const Content = styled.div`
         text-decoration: none;
     }
 
-    .star-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-    }
-    .checked{
-        color: yellow;
-    }
+    
 
     .reviewImg{
         width: 100px;

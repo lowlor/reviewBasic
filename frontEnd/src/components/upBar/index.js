@@ -20,6 +20,11 @@ const UpBar = ({setIsLogin, isLogin}) =>{
     return (
         <Wrapper>
             <Content>
+                <Link to="/">
+                    <button>
+                        Home
+                    </button>
+                </Link>
                 <Link to="/auth">
                     <button>
                         Login

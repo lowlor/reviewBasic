@@ -13,8 +13,10 @@ export const Content = styled.div`
     text-align: center;
 
     img{
-        width: 500px;
+        width: 150px;
     }
 
-    
+    @media screen and (max-width: 768px){
+        padding: 20px 5px;
+    }    
 `;

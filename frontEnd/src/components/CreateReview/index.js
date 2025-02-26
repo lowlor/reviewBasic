@@ -18,9 +18,15 @@ const CreateReview = () =>{
         console.log(infoInput);
         console.log(numberInput);
         
+
+        if(imgInput === ''||nameText === '' || infoInput === ''){
+            return alert('Please enter all field');
+        }
         //prepare img
 
         const sendFile = async () =>{
+
+            
             try {
                 const {data} = await axios.post('http://localhost:5000/api/review',
                     {
@@ -71,11 +77,23 @@ const CreateReview = () =>{
     return(
         <Wrapper>
             <Content>
-                <input type="file" onChange={(e)=>setImgTnput(e.target.files[0])}/>
-                <input type='text' value={nameText} onChange={(e)=>{setNameText(e.target.value)}}/>
-                <input type="number" value={numberInput} onChange={(e)=>setNumberInput(e.target.value)} />
-                <textarea cols='40' rows='5' value={infoInput} onChange={(e)=>{setInfoInput(e.target.value)}}>
-                </textarea>
+                <p>Insert your picture you want to display</p>
+                <div class='inputSec'>
+                    <input type="file" onChange={(e)=>setImgTnput(e.target.files[0])}/>
+                </div>
+                <p>What is your product you want review</p>
+                <div class='inputSec'>
+                    <input type='text' value={nameText} onChange={(e)=>{setNameText(e.target.value)}}/>                    
+                </div>
+                <p>Give rating (0-5)</p>
+                <div class='inputSec'>
+                    <input type="number" value={numberInput} min='0' max='5' onChange={(e)=>setNumberInput(e.target.value)} />                
+                </div>
+                <p>What is your opinion</p>
+                <div class='inputSec'>
+                    <textarea cols='90' rows='30' value={infoInput} onChange={(e)=>{setInfoInput(e.target.value)}}>
+                    </textarea>
+                </div>
                 <button onClick={()=>buttonPush()}>Send</button>
             </Content>
         </Wrapper>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     width: 100%;
     position: relative;
-    background-color: #81f3cd;
+    background-color: ${({ image }) => (image ? 'none' : '#bababa')}; // Fixing background color
 `;
 
 export const Content = styled.div`
@@ -33,5 +33,6 @@ export const BackgroundImg = styled.div`
     height: 100%;
     top: 0;
     left: 0;
+    z-index: -1;
     position: absolute;
 `;

@@ -8,9 +8,9 @@ import UpBar from "./upBar";
 const initial = {
     status:1,
     info:[{
-        name:'newReview',
-        rating:2,
-        info:'not great bro. Dont buy it'
+        name:'not Found',
+        rating:5,
+        info:''
     }]
 }
 const Home = ({setIsLogin, isLogin}) =>{

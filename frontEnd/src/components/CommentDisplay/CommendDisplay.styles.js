@@ -22,4 +22,9 @@ export const Content = styled.div`
         padding: 10px 60px 10px 10px;
         border-bottom : 1px solid black;
     }
+
+    @media screen and (max-width: 768px){
+        padding: 20px 20px;
+    }    
+
 `;
